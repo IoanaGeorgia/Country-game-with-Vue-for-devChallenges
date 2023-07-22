@@ -3,12 +3,19 @@
   <div class='wrapperBefore'></div>
   <div class='wrapperAfter'></div>
 
+
+
+https://htmlcolorcodes.com/color-picker/
+
+
   <div class='mainCard'>
   <span class='cardTitle'>Country Quiz</span>
   <!-- Stackblitz won't allow non-premium members to upload images to their projects so I used an emoji for the card image -->
   <span class='cardImage'>🌍</span>
+
+
   <div class='questionsWrapper'>
-  <p class='question'> iiiiiiiii iiiiii iiiii is the capital of</p>
+  <p class='question'> WORK IN PROGRESS is the capital of</p>
   <p  class='answer'>aaaaaaaaa</p>
    <p class='answer'>bbbbbbbbbbbbbbb</p> 
    <p class='answer'>ccc</p>
