@@ -5,11 +5,19 @@
 
   <div class='mainCard'>
   <span class='cardTitle'>Country Quiz</span>
+  <!-- Stackblitz won't allow non-premium members to upload images to their projects so I used an emoji for the card image -->
   <span class='cardImage'>🌍</span>
-  ssss
+  <div class='questionsWrapper'>
+  <p class='question'> iiiiiiiii iiiiii iiiii is the capital of</p>
+  <p  class='answer'>aaaaaaaaa</p>
+   <p class='answer'>bbbbbbbbbbbbbbb</p> 
+   <p class='answer'>ccc</p>
+    <p class='answer'>dddddddddd</p>
   </div>
 
-    <p>Challenge created by Pascu Ioana with Vue and Stackblitz for <a href='https://devchallenges.io/challenges/Bu3G2irnaXmfwQ8sZkw8'>DevChallenges -> Front End Developer Path</a></p>
+  </div>
+
+    <p class='explanation'>Challenge created by Pascu Ioana with Vue and Stackblitz for <a href='https://devchallenges.io/challenges/Bu3G2irnaXmfwQ8sZkw8'>DevChallenges -> Front End Developer Path</a></p>
   </div>
 </template>
 
@@ -28,11 +36,42 @@ export default {
   padding:0px;
   margin:0px;
 }
+.answer{
+  position:relative;
+  width:100%;
+  border:2px solid navy;
+  border-radius:10px;
+  height:15%;
+  display:flex;
+  place-items:center;
+
+}
+.question{
+  color:navy;
+  font-size:20px;
+  font-weight:bolder;
+  position:relative;
+  width:100%;
+  text-align:left;
+  height:5%;
+  
+}
+.questionsWrapper{
+  top:9vh;
+  margin:auto;
+  position:relative;
+  width:85%;
+  height:75%;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:center;
+}
 .cardImage{
   font-size:20vh;
   position:absolute;
   right:-2vh;
-  top:-15vh;
+  top:-16vh;
 }
 .cardTitle{
   text-transform:uppercase;
@@ -44,11 +83,11 @@ export default {
 }
 .mainCard{
   background-color:white;
-  width:60vh;
-  height: 65vh;
+  width:65vh;
+  height: 75vh;
   z-index:6;
   position: relative;
-  top:15vh;
+  top:14vh;
   margin:auto;
   border-radius:20px;
 }
@@ -81,11 +120,12 @@ export default {
   transform:rotate(40deg);
   border-radius:25px;
 }
-p{
+.explanation{
+  font-size:12px;
   z-index:5;
   color:white;
   opacity:0.8;
-  padding: 10vh 10vh;
+  padding: 4vh 10vh;
   position:absolute;
   bottom:0px;
   text-align:center;
