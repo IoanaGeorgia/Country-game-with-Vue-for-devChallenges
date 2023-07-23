@@ -14,9 +14,9 @@
   <div class='questionsWrapper'>
   <p class='question'> WORK IN PROGRESS is the capital of</p>
   <p  class='answer'> <span class='answerCounter'>A</span>aaaaaaaaa</p>
-   <p class='answer'><span class='answerCounter'>B</spanbbbbbbbbbbbbbbb</p> 
-   <p class='answer'><span class='answerCounter'>C</spanccc</p>
-    <p class='answer'><span class='answerCounter'>D</spandddddddddd</p>
+   <p class='answer'><span class='answerCounter'>B</span>bbbbbbbbbbbbbbb</p> 
+   <p class='answer'><span class='answerCounter'>C</span>ccc</p>
+    <p class='answer'><span class='answerCounter'>D</span>dddddddddd</p>
   </div>
 
   </div>
@@ -39,6 +39,21 @@ export default {
 *{
   padding:0px;
   margin:0px;
+}
+.answerWrong{
+  color:white !important;
+  background:#d54d63;
+  border:2px solid #d54d63 !important;
+
+}
+.answerWrong > *, .answerRight > *{
+  color:white !important;
+}
+.answerRight{
+  color:white !important;
+  background:#63d54d;
+  border:2px solid #63d54d !important;
+
 }
 .answer:hover{
   cursor:pointer;
