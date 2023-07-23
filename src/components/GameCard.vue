@@ -9,18 +9,20 @@
       <span class="cardImage">🌍</span>
 
       <div v-if="!loading" class="questionsWrapper">
-        <!-- {{currentChoices}} -->
+  
         <p class="question">
           {{ currentChoices.capital.capital }} is the capital of
-          {{ currentChoices.capital.name }}
+          <!-- {{ currentChoices.capital.name }} -->
         </p>
 
         <p class="answer"><span class="answerCounter">A</span> {{ currentChoices.choiceA.name }}</p>
         <p class="answer">
           <span class="answerCounter">B</span> {{ currentChoices.choiceB.name }}
         </p>
-        <p class="answer"><span class="answerCounter">C</span> {{ currentChoices.choiceC.name }}</p>
-        <p class="answer"><span class="answerCounter">D</span> {{ currentChoices.choiceD.name }}</p>
+        <p class="answer"><span class="answerCounter">C</span> 
+        {{ currentChoices.choiceC.name }}</p>
+        <p class="answer"><span class="answerCounter">D</span>
+         {{ currentChoices.choiceD.name }}</p>
       </div>
     </div>
 
@@ -92,7 +94,7 @@ export default {
             Math.floor(Math.random() * this.countriesInfo.length - 1)
           ];
 
-        console.log(countriesInfo);
+    
         this.currentChoices.capital = {
           name: capital.name.common,
           flag: capital.flag,
@@ -108,17 +110,24 @@ export default {
           flag: choiceB.flag,
           capital: choiceB.capital[0],
         };
-        this.currentlChoices.choiceC = {
+        this.currentChoices.choiceC = {
           name: choiceC.name.common,
           flag: choiceC.flag,
           capital: choiceC.capital[0],
         };
-        this.currentlChoices.choiceD = {
+        this.currentChoices.choiceD = {
           name: choiceD.name.common,
           flag: choiceD.flag,
           capital: choiceD.capital[0],
         };
+
+let keys = ['choiceA', 'choiceB', 'choiceC', 'choiceD']
+        let randomRightAnswer = keys[Math.floor(Math.random() * keys.length - 1)]
+
+       this.currentChoices[randomRightAnswer] = this.currentChoices.capital
+
       }
+    
     },
   },
 };
@@ -167,6 +176,7 @@ export default {
   height: 15%;
   display: flex;
   place-items: center;
+  color: #724dd5;
 }
 .question {
   color: navy;
