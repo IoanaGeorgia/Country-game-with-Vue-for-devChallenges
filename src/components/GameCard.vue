@@ -72,19 +72,15 @@ export default {
      let choiceC = this.countriesInfo[Math.floor(Math.random() * this.countriesInfo.length-1)]
      let choiceD =  this.countriesInfo[Math.floor(Math.random() * this.countriesInfo.length-1)]
 
-
-// console.log(Math.floor(Math.random() * this.countriesInfo.length-1))
-
     this.currentChoices.capital = capital
     this.currentChoices.choiceA = choiceA
     this.currentChoices.choiceB = choiceB
     this.currentlChoices.choiceC = choiceC
     this.currentlChoices.choiceD = choiceD
 
-    console.log(this.currentChoices, 'aa')
+    console.log(capital)
 
       }
-    
 
   }
 }}
