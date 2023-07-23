@@ -68,29 +68,29 @@ export default {
       const finalRes = await res.json();
       this.countriesInfo = await finalRes;
       this.loading = false;
-      this.handleCurrentChoices(finalRes);
+      this.handleCurrentChoices();
     },
-    handleCurrentChoices(countriesInfo) {
-      if (countriesInfo.length) {
+    handleCurrentChoices() {
+      if (this.countriesInfo.length) {
         let capital =
-          countriesInfo[
+          this.countriesInfo[
             Math.floor(Math.random() * this.countriesInfo.length - 1)
           ];
 
         let choiceA =
-          countriesInfo[
+          this.countriesInfo[
             Math.floor(Math.random() * this.countriesInfo.length - 1)
           ];
         let choiceB =
-          countriesInfo[
+          this.countriesInfo[
             Math.floor(Math.random() * this.countriesInfo.length - 1)
           ];
         let choiceC =
-          countriesInfo[
+          this.countriesInfo[
             Math.floor(Math.random() * this.countriesInfo.length - 1)
           ];
         let choiceD =
-          countriesInfo[
+          this.countriesInfo[
             Math.floor(Math.random() * this.countriesInfo.length - 1)
           ];
 
@@ -138,6 +138,8 @@ let keys = ['choiceA', 'choiceB', 'choiceC', 'choiceD']
 * {
   padding: 0px;
   margin: 0px;
+  letter-spacing:1px;
+  font-family:Verdana;
 }
 .answerWrong {
   color: white !important;
@@ -166,7 +168,7 @@ let keys = ['choiceA', 'choiceB', 'choiceC', 'choiceD']
   color: #724dd5;
   font-weight: bolder;
   padding: 0px 3vh;
-  font-size: 23px;
+  font-size: 20px;
 }
 .answer {
   position: relative;
@@ -177,6 +179,8 @@ let keys = ['choiceA', 'choiceB', 'choiceC', 'choiceD']
   display: flex;
   place-items: center;
   color: #724dd5;
+  font-weight:bold;
+  font-size:14px;
 }
 .question {
   color: navy;
