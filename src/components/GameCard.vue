@@ -11,10 +11,10 @@
   <span class='cardImage'>🌍</span>
 
 
-  <div class='questionsWrapper'>
-  <!-- {{countriesInfo}} -->
-  {{currentChoices}}
-  <p class='question'> WORK IN PROGRESS is the capital of</p>
+  <div v-if='currentChoices.capital' class='questionsWrapper'>
+  <!-- {{currentChoices}} -->
+  <p class='question'> {{currentChoices.capital.capital}} is the capital of {{currentChoices.capital.name}}</p>
+
   <p  class='answer'> <span class='answerCounter'>A</span>aaaaaaaaa</p>
    <p class='answer'><span class='answerCounter'>B</span>bbbbbbbbbbbbbbb</p> 
    <p class='answer'><span class='answerCounter'>C</span>ccc</p>
@@ -38,7 +38,14 @@ export default {
       countriesInfo:[],
       error:null,
       answersCounter:0,
-      // currentChoices:{}
+      currentChoices:{
+        capital:{},
+        choiceA:{},
+        choiceB:{},
+        choiceC:{},
+        choiceD:{}
+
+      }
     }
   },
   mounted(){
@@ -46,9 +53,19 @@ export default {
 
   },
   computed:{
-    currentChoices(){
-      let allChoices = {}
-     let capital = this.countriesInfo[Math.floor(Math.random() * (this.countriesInfo.length-1 )]
+  },
+  methods:{
+      async getCountriesInfo() {
+        const res = await fetch("https://restcountries.com/v3.1/all?fields=name,flag,capital");
+        const finalRes = await res.json();
+        this.countriesInfo = finalRes;
+        this.handleCurrentChoices()
+
+      },
+      handleCurrentChoices(){
+
+      if(this.countriesInfo.length){
+     let capital = this.countriesInfo[Math.floor(Math.random() * this.countriesInfo.length-1)]
 
      let choiceA= this.countriesInfo[Math.floor(Math.random() * this.countriesInfo.length-1)]
      let choiceB =  this.countriesInfo[Math.floor(Math.random() * this.countriesInfo.length-1)]
@@ -56,33 +73,21 @@ export default {
      let choiceD =  this.countriesInfo[Math.floor(Math.random() * this.countriesInfo.length-1)]
 
 
-console.log(Math.floor(Math.random() * this.countriesInfo.length-1))
+// console.log(Math.floor(Math.random() * this.countriesInfo.length-1))
 
-    allChoices[capital] = capital
-    allChoices[choiceA] = choiceA
-    allChoices[choiceB] = choiceB
-    allChoices[choiceC] = choiceC
-    allChoices[choiceD] = choiceD
+    this.currentChoices.capital = capital
+    this.currentChoices.choiceA = choiceA
+    this.currentChoices.choiceB = choiceB
+    this.currentlChoices.choiceC = choiceC
+    this.currentlChoices.choiceD = choiceD
 
-console.log(allChoices, 'all')
-    return allChoices
+    console.log(this.currentChoices, 'aa')
+
+      }
     
 
-    }
-  },
-  methods:{
-      async getCountriesInfo() {
-        const res = await fetch("https://restcountries.com/v3.1/all?fields=name,flag,capital");
-        const finalRes = await res.json();
-        this.countriesInfo = finalRes;
-
-      },
-    // getCurrentChoices(){
-    //   this.currentChoices = this.countriesInfo[0]
-    // }
-
   }
-}
+}}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
