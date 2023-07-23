@@ -30,6 +30,24 @@ export default {
   name: 'GameCard',
   props: {
     // msg: String
+  },
+  data(){
+    return{
+      countriesInfo:[],
+      error:null,
+      answersCounter:0,
+      currentChoices:{}
+    }
+  },
+  mounted(){
+
+  },
+  methods:{
+      async getCountriesInfo() {
+        const res = await fetch("https://restcountries.com/v3.1/all?fields=name,flag,capital");
+        const finalRes = await res.json();
+        this.countriesInfo = finalRes;
+      }
   }
 }
 </script>
