@@ -40,6 +40,16 @@ export default {
   padding:0px;
   margin:0px;
 }
+.answer:hover{
+  cursor:pointer;
+  color:white;
+  background:orange;
+  border:2px solid orange;
+
+}
+.answer:hover > *{
+  color:white;
+}
 .answerCounter{
   color:#724dd5;
   font-weight:bolder;
