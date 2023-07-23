@@ -5,9 +5,6 @@
 
 
 
-https://htmlcolorcodes.com/color-picker/
-
-
   <div class='mainCard'>
   <span class='cardTitle'>Country Quiz</span>
   <!-- Stackblitz won't allow non-premium members to upload images to their projects so I used an emoji for the card image -->
@@ -16,10 +13,10 @@ https://htmlcolorcodes.com/color-picker/
 
   <div class='questionsWrapper'>
   <p class='question'> WORK IN PROGRESS is the capital of</p>
-  <p  class='answer'>aaaaaaaaa</p>
-   <p class='answer'>bbbbbbbbbbbbbbb</p> 
-   <p class='answer'>ccc</p>
-    <p class='answer'>dddddddddd</p>
+  <p  class='answer'> <span class='answerCounter'>A</span>aaaaaaaaa</p>
+   <p class='answer'><span class='answerCounter'>B</spanbbbbbbbbbbbbbbb</p> 
+   <p class='answer'><span class='answerCounter'>C</spanccc</p>
+    <p class='answer'><span class='answerCounter'>D</spandddddddddd</p>
   </div>
 
   </div>
@@ -43,6 +40,12 @@ export default {
   padding:0px;
   margin:0px;
 }
+.answerCounter{
+  color:#724dd5;
+  font-weight:bolder;
+  padding:0px 3vh;
+  font-size:23px;
+}
 .answer{
   position:relative;
   width:100%;
@@ -55,7 +58,7 @@ export default {
 }
 .question{
   color:navy;
-  font-size:20px;
+  font-size:17px;
   font-weight:bolder;
   position:relative;
   width:100%;
@@ -75,7 +78,7 @@ export default {
   align-items:center;
 }
 .cardImage{
-  font-size:20vh;
+  font-size:18vh;
   position:absolute;
   right:-2vh;
   top:-16vh;
@@ -132,10 +135,11 @@ export default {
   z-index:5;
   color:white;
   opacity:0.8;
-  padding: 4vh 10vh;
+  padding: 4vh 0vh;
   position:absolute;
   bottom:0px;
   text-align:center;
+  width:100%;
 }
 a, a:active, a:hover, a:visited{
   color: white;
