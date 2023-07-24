@@ -15,14 +15,25 @@
           {{ currentChoices.capital.name }}
         </p>
 
-        <p :class="{ 'answer':true, 'answerRight': isRightAnswerA }" 
+        <p :class="{ 'answer':true, 'answerRight': isRightAnswerA,
+         'answerWrong': isWrongAnswerA 
+         }" 
         @click='pickAnswer(currentChoices.choiceA, "A")'><span class="answerCounter">A</span> {{ currentChoices.choiceA.name }}</p>
-        <p :class="{ 'answer':true, 'answerRight': isRightAnswerB }"  @click='pickAnswer(currentChoices.choiceB, "B")'>
-          <span class="answerCounter">B</span> {{ currentChoices.choiceB.name }}
+
+        <p :class="{ 'answer':true, 'answerRight': isRightAnswerB, 
+         'answerWrong': isWrongAnswerB }"  
+        @click='pickAnswer(currentChoices.choiceB, "B")'>
+ <span class="answerCounter">B</span> {{ currentChoices.choiceB.name }}
         </p>
-        <p :class="{ 'answer':true, 'answerRight': isRightAnswerD }"   @click='pickAnswer(currentChoices.choiceC, "C")'><span class="answerCounter">C</span> 
+
+        <p :class="{ 'answer':true, 'answerRight': isRightAnswerC,  
+        'answerWrong': isWrongAnswerC }"   
+        @click='pickAnswer(currentChoices.choiceC, "C")'><span class="answerCounter">C</span> 
         {{ currentChoices.choiceC.name }}</p>
-        <p :class="{ 'answer':true, 'answerRight': isRightAnswerD }"   @click='pickAnswer(currentChoices.choiceD, "D")'><span class="answerCounter">D</span>
+
+        <p :class="{ 'answer':true, 'answerRight': isRightAnswerD, 
+         'answerWrong': isWrongAnswerD }"   
+        @click='pickAnswer(currentChoices.choiceD, "D")'><span class="answerCounter">D</span>
          {{ currentChoices.choiceD.name }}</p>
       </div>
     </div>
@@ -52,6 +63,10 @@ export default {
       isRightAnswerB:false,
       isRightAnswerC:false,
       isRightAnswerD:false,
+      isWrongAnswerA:false,
+      isWrongAnswerB:false,
+      isWrongAnswerC:false,
+      isWrongAnswerD:false,
       currentChoices: {
         capital: {},
         choiceA: {},
@@ -95,6 +110,38 @@ export default {
     break;
     case "D":
     this.isRightAnswerD = true
+    break;
+}
+      } 
+      else if(this.currentChoices.capital.capital !== choice.capital)
+      {
+        
+//                 switch(letter) {
+//   case "A":
+//   this.isRightAnswerA = true
+//     break;
+//   case "B":
+//       this.isRightAnswerB = true
+//     break;
+//   case "C":
+//     this.isRightAnswerC = true
+//     break;
+//     case "D":
+//     this.isRightAnswerD = true
+//     break;
+// }
+        switch(letter) {
+  case "A":
+  this.isWrongAnswerA = true
+    break;
+  case "B":
+      this.isWrongAnswerB = true
+    break;
+  case "C":
+    this.isWrongAnswerC = true
+    break;
+    case "D":
+    this.isWrongAnswerD = true
     break;
 }
       }
@@ -151,11 +198,11 @@ export default {
         };
 
     let keys = ['choiceA', 'choiceB', 'choiceC', 'choiceD']
-        let randomRightAnswer = keys[Math.floor(Math.random() * keys.length - 1)]
+        let randomRightAnswer = keys[Math.floor(Math.random() * keys.length)]
 
-       this.currentChoices[randomRightAnswer] = this.currentChoices.capital[0]
+       this.currentChoices[randomRightAnswer] = this.currentChoices.capital
 
-  console.log(randomRightAnswer, this.currentChoices)
+  console.log(randomRightAnswer, this.currentChoices.capital)
       }
   
     },
