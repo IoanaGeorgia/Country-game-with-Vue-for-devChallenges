@@ -12,16 +12,17 @@
   
         <p class="question">
           {{ currentChoices.capital.capital }} is the capital of
-          <!-- {{ currentChoices.capital.name }} -->
+          {{ currentChoices.capital.name }}
         </p>
 
-        <p class="answer"><span class="answerCounter">A</span> {{ currentChoices.choiceA.name }}</p>
-        <p class="answer">
+        <p :class="{ 'answer':true, 'answerRight': isRightAnswerA }" 
+        @click='pickAnswer(currentChoices.choiceA, "A")'><span class="answerCounter">A</span> {{ currentChoices.choiceA.name }}</p>
+        <p :class="{ 'answer':true, 'answerRight': isRightAnswerB }"  @click='pickAnswer(currentChoices.choiceB, "B")'>
           <span class="answerCounter">B</span> {{ currentChoices.choiceB.name }}
         </p>
-        <p class="answer"><span class="answerCounter">C</span> 
+        <p :class="{ 'answer':true, 'answerRight': isRightAnswerD }"   @click='pickAnswer(currentChoices.choiceC, "C")'><span class="answerCounter">C</span> 
         {{ currentChoices.choiceC.name }}</p>
-        <p class="answer"><span class="answerCounter">D</span>
+        <p :class="{ 'answer':true, 'answerRight': isRightAnswerD }"   @click='pickAnswer(currentChoices.choiceD, "D")'><span class="answerCounter">D</span>
          {{ currentChoices.choiceD.name }}</p>
       </div>
     </div>
@@ -47,6 +48,10 @@ export default {
       error: null,
       loading: false,
       answersCounter: 0,
+      isRightAnswerA:false,
+      isRightAnswerB:false,
+      isRightAnswerC:false,
+      isRightAnswerD:false,
       currentChoices: {
         capital: {},
         choiceA: {},
@@ -69,6 +74,30 @@ export default {
       this.countriesInfo = await finalRes;
       this.loading = false;
       this.handleCurrentChoices();
+    },
+
+    pickAnswer(choice, letter){
+      // console.log(choice)
+      // console.log(choice.capital, this.currentChoices.capital.capital)
+      console.log(this.currentChoices)
+      if(this.currentChoices.capital.capital === choice.capital){
+        // console.log('yuppyyyyyy')
+  
+        switch(letter) {
+  case "A":
+  this.isRightAnswerA = true
+    break;
+  case "B":
+      this.isRightAnswerB = true
+    break;
+  case "C":
+    this.isRightAnswerC = true
+    break;
+    case "D":
+    this.isRightAnswerD = true
+    break;
+}
+      }
     },
     handleCurrentChoices() {
       if (this.countriesInfo.length) {
@@ -121,13 +150,14 @@ export default {
           capital: choiceD.capital[0],
         };
 
-let keys = ['choiceA', 'choiceB', 'choiceC', 'choiceD']
+    let keys = ['choiceA', 'choiceB', 'choiceC', 'choiceD']
         let randomRightAnswer = keys[Math.floor(Math.random() * keys.length - 1)]
 
-       this.currentChoices[randomRightAnswer] = this.currentChoices.capital
+       this.currentChoices[randomRightAnswer] = this.currentChoices.capital[0]
 
+  console.log(randomRightAnswer, this.currentChoices)
       }
-    
+  
     },
   },
 };
@@ -152,6 +182,11 @@ let keys = ['choiceA', 'choiceB', 'choiceC', 'choiceD']
 }
 .answerRight {
   color: white !important;
+  background: #63d54d;
+  border: 2px solid #63d54d !important;
+}
+.answerRight:hover{
+   color: white !important;
   background: #63d54d;
   border: 2px solid #63d54d !important;
 }
