@@ -91,6 +91,7 @@ export default {
       error: null,
       loading: false,
       answersCounter: 0,
+      roundsCounter:0,
       visibleNextButton:false,
       isRightAnswerA: false,
       isRightAnswerB: false,
@@ -137,7 +138,7 @@ export default {
     },
 
 goToNext(){
-  console.log('go to next')
+  // console.log('go to next')
       this.visibleNextButton=false,
       this.isRightAnswerA= false,
       this.isRightAnswerB=false,
@@ -169,13 +170,22 @@ goToNext(){
       this.handleCurrentChoices()
 },
     pickAnswer(choice, letter) {
-        (this.disabledHoverA = true),
-        (this.disabledHoverB = true),
-        (this.disabledHoverC = true),
-        (this.disabledHoverD = true),
-this.visibleNextButton = true
+
+
+
+      if(this.roundsCounter < 5){
+
+      this.roundsCounter++
+        this.disabledHoverA = true,
+        this.disabledHoverB = true,
+        this.disabledHoverC = true,
+        this.disabledHoverD = true,
+        this.visibleNextButton = true
+         console.log(this.roundsCounter, 'rounds')
 
       if (this.currentChoices.capital.capital === choice.capital) {
+        this.answersCounter++
+        console.log(this.answersCounter)
         switch (letter) {
           case 'A':
             this.isRightAnswerA = true;
@@ -254,6 +264,10 @@ this.visibleNextButton = true
             break;
         }
       }
+      }
+      else if (this.roundsCounter >= 5){
+        console.log('more than 5 rounds')
+      }
     },
     handleCurrentChoices() {
       if (this.countriesInfo.length) {
@@ -310,7 +324,6 @@ this.visibleNextButton = true
 
         this.currentChoices[randomRightAnswer] = this.currentChoices.capital;
 
-        console.log(randomRightAnswer, this.currentChoices.capital);
       }
     },
   },
