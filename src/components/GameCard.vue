@@ -9,32 +9,63 @@
       <span class="cardImage">🌍</span>
 
       <div v-if="!loading" class="questionsWrapper">
-  
         <p class="question">
           {{ currentChoices.capital.capital }} is the capital of
           {{ currentChoices.capital.name }}
         </p>
 
-        <p :class="{ 'answer':true, 'answerRight': isRightAnswerA,
-         'answerWrong': isWrongAnswerA 
-         }" 
-        @click='pickAnswer(currentChoices.choiceA, "A")'><span class="answerCounter">A</span> {{ currentChoices.choiceA.name }}</p>
-
-        <p :class="{ 'answer':true, 'answerRight': isRightAnswerB, 
-         'answerWrong': isWrongAnswerB }"  
-        @click='pickAnswer(currentChoices.choiceB, "B")'>
- <span class="answerCounter">B</span> {{ currentChoices.choiceB.name }}
+        <p
+          :class="{
+            'answer': true,
+            'answerRight': isRightAnswerA,
+            'answerWrong': isWrongAnswerA,
+            'disabledHover': disabledHoverA,
+          }"
+          @click="pickAnswer(currentChoices.choiceA, 'A')"
+        >
+          <span class="answerCounter">A</span> {{ currentChoices.choiceA.name }}
+            <p :class="{'choiceDot': visibleChoiceDotA}">{{choiceIconA}}</p>
         </p>
 
-        <p :class="{ 'answer':true, 'answerRight': isRightAnswerC,  
-        'answerWrong': isWrongAnswerC }"   
-        @click='pickAnswer(currentChoices.choiceC, "C")'><span class="answerCounter">C</span> 
-        {{ currentChoices.choiceC.name }}</p>
+        <p
+          :class="{
+            'answer': true,
+            'answerRight': isRightAnswerB,
+            'answerWrong': isWrongAnswerB,
+            'disabledHover': disabledHoverB,
+          }"
+          @click="pickAnswer(currentChoices.choiceB, 'B')"
+        >
+          <span class="answerCounter">B</span> {{ currentChoices.choiceB.name }}
+            <p :class="{'choiceDot': visibleChoiceDotB}">{{choiceIconB}}</p>
+        </p>
 
-        <p :class="{ 'answer':true, 'answerRight': isRightAnswerD, 
-         'answerWrong': isWrongAnswerD }"   
-        @click='pickAnswer(currentChoices.choiceD, "D")'><span class="answerCounter">D</span>
-         {{ currentChoices.choiceD.name }}</p>
+        <p
+          :class="{
+            'answer': true,
+            'answerRight': isRightAnswerC,
+            'answerWrong': isWrongAnswerC,
+            'disabledHover': disabledHoverC,
+          }"
+          @click="pickAnswer(currentChoices.choiceC, 'C')"
+        >
+          <span class="answerCounter">C</span> {{ currentChoices.choiceC.name }}
+            <p :class="{'choiceDot': visibleChoiceDotC}">{{choiceIconC}}</p>
+        </p>
+
+        <p
+          :class="{
+            'answer': true,
+            'answerRight': isRightAnswerD,
+            'answerWrong': isWrongAnswerD,
+            'disabledHover': disabledHoverD,
+          }"
+          @click="pickAnswer(currentChoices.choiceD, 'D')"
+        >
+          <span class="answerCounter">D</span>
+           {{ currentChoices.choiceD.name }}
+          <p :class="{'choiceDot': visibleChoiceDotD}">{{choiceIconD}}</p>
+        </p>
       </div>
     </div>
 
@@ -59,14 +90,26 @@ export default {
       error: null,
       loading: false,
       answersCounter: 0,
-      isRightAnswerA:false,
-      isRightAnswerB:false,
-      isRightAnswerC:false,
-      isRightAnswerD:false,
-      isWrongAnswerA:false,
-      isWrongAnswerB:false,
-      isWrongAnswerC:false,
-      isWrongAnswerD:false,
+      isRightAnswerA: false,
+      isRightAnswerB: false,
+      isRightAnswerC: false,
+      isRightAnswerD: false,
+      isWrongAnswerA: false,
+      isWrongAnswerB: false,
+      isWrongAnswerC: false,
+      isWrongAnswerD: false,
+      disabledHoverA: false,
+      disabledHoverB: false,
+      disabledHoverC: false,
+      disabledHoverD: false,
+           visibleChoiceDotA:false,     
+           visibleChoiceDotB:false,     
+           visibleChoiceDotC:false,
+      visibleChoiceDotD:false,
+      choiceIconA:'',
+      choiceIconB:'',
+      choiceIconC:'',
+      choiceIconD:'',
       currentChoices: {
         capital: {},
         choiceA: {},
@@ -91,59 +134,91 @@ export default {
       this.handleCurrentChoices();
     },
 
-    pickAnswer(choice, letter){
-      // console.log(choice)
-      // console.log(choice.capital, this.currentChoices.capital.capital)
-      console.log(this.currentChoices)
-      if(this.currentChoices.capital.capital === choice.capital){
-        // console.log('yuppyyyyyy')
-  
-        switch(letter) {
-  case "A":
-  this.isRightAnswerA = true
-    break;
-  case "B":
-      this.isRightAnswerB = true
-    break;
-  case "C":
-    this.isRightAnswerC = true
-    break;
-    case "D":
-    this.isRightAnswerD = true
-    break;
-}
-      } 
-      else if(this.currentChoices.capital.capital !== choice.capital)
-      {
-        
-//                 switch(letter) {
-//   case "A":
-//   this.isRightAnswerA = true
-//     break;
-//   case "B":
-//       this.isRightAnswerB = true
-//     break;
-//   case "C":
-//     this.isRightAnswerC = true
-//     break;
-//     case "D":
-//     this.isRightAnswerD = true
-//     break;
-// }
-        switch(letter) {
-  case "A":
-  this.isWrongAnswerA = true
-    break;
-  case "B":
-      this.isWrongAnswerB = true
-    break;
-  case "C":
-    this.isWrongAnswerC = true
-    break;
-    case "D":
-    this.isWrongAnswerD = true
-    break;
-}
+    pickAnswer(choice, letter) {
+        (this.disabledHoverA = true),
+        (this.disabledHoverB = true),
+        (this.disabledHoverC = true),
+        (this.disabledHoverD = true),
+        console.log(this.currentChoices);
+
+      if (this.currentChoices.capital.capital === choice.capital) {
+        switch (letter) {
+          case 'A':
+            this.isRightAnswerA = true;
+            this.visibleChoiceDotA = true;
+            this.choiceIconA = '✓'
+            break;
+          case 'B':
+            this.isRightAnswerB = true;
+            this.visibleChoiceDotB = true;
+            this.choiceIconB = '✓'
+            break;
+          case 'C':
+            this.isRightAnswerC = true;
+            this.visibleChoiceDotC = true;
+            this.choiceIconC = '✓'
+            break;
+          case 'D':
+            this.isRightAnswerD = true;
+            this.visibleChoiceDotD = true;
+            this.choiceIconD = '✓'
+            break;
+        }
+      }
+       else if (this.currentChoices.capital.capital !== choice.capital) {
+          let winningKey;
+        for (const [key, value] of Object.entries(this.currentChoices)) {
+          if (
+            value['capital'] === this.currentChoices.capital.capital &&
+            key !== 'capital'
+          ) {
+            winningKey = key.toString().slice(-1);
+          }
+        }
+        switch (winningKey) {
+          case 'A':
+            this.isRightAnswerA = true;
+            this.visibleChoiceDotA = true;
+            this.choiceIconA = '✓'
+            break;
+          case 'B':
+            this.isRightAnswerB = true;
+            this.visibleChoiceDotB = true;
+            this.choiceIconB = '✓'
+            break;
+          case 'C':
+            this.isRightAnswerC = true;
+            this.visibleChoiceDotBC = true;
+            this.choiceIconC = '✓'
+            break;
+          case 'D':
+            this.isRightAnswerD = true;
+           this.visibleChoiceDotD = true;
+            this.choiceIconD = '✓'
+            break;
+        }
+        switch (letter) {
+          case 'A':
+            this.isWrongAnswerA = true;
+            this.visibleChoiceDotA = true;
+            this.choiceIconA = '✖'
+            break;
+          case 'B':
+            this.isWrongAnswerB = true;
+            this.visibleChoiceDotB = true;
+            this.choiceIconB = '✖'
+            break;
+          case 'C':
+            this.isWrongAnswerC = true;
+            this.visibleChoiceDotC = true;
+            this.choiceIconC = '✖'
+            break;
+          case 'D':
+            this.isWrongAnswerD = true;
+            this.visibleChoiceDotD = true;
+            this.choiceIconD = '✖'
+            break;
+        }
       }
     },
     handleCurrentChoices() {
@@ -170,7 +245,6 @@ export default {
             Math.floor(Math.random() * this.countriesInfo.length - 1)
           ];
 
-    
         this.currentChoices.capital = {
           name: capital.name.common,
           flag: capital.flag,
@@ -197,14 +271,13 @@ export default {
           capital: choiceD.capital[0],
         };
 
-    let keys = ['choiceA', 'choiceB', 'choiceC', 'choiceD']
-        let randomRightAnswer = keys[Math.floor(Math.random() * keys.length)]
+        let keys = ['choiceA', 'choiceB', 'choiceC', 'choiceD'];
+        let randomRightAnswer = keys[Math.floor(Math.random() * keys.length)];
 
-       this.currentChoices[randomRightAnswer] = this.currentChoices.capital
+        this.currentChoices[randomRightAnswer] = this.currentChoices.capital;
 
-  console.log(randomRightAnswer, this.currentChoices.capital)
+        console.log(randomRightAnswer, this.currentChoices.capital);
       }
-  
     },
   },
 };
@@ -215,8 +288,26 @@ export default {
 * {
   padding: 0px;
   margin: 0px;
-  letter-spacing:1px;
-  font-family:Verdana;
+  letter-spacing: 1px;
+  font-family: Verdana;
+}
+.choiceDot{
+  background:transparent;
+  font-size:18px;
+  border:2px solid white;
+  color:white;
+  width:23px;
+  height:23px;
+  border-radius:50%;
+  position:absolute;
+  right:20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:normal;
+}
+.disabledHover {
+  pointer-events: none !important;
 }
 .answerWrong {
   color: white !important;
@@ -232,8 +323,8 @@ export default {
   background: #63d54d;
   border: 2px solid #63d54d !important;
 }
-.answerRight:hover{
-   color: white !important;
+.answerRight:hover {
+  color: white !important;
   background: #63d54d;
   border: 2px solid #63d54d !important;
 }
@@ -261,8 +352,8 @@ export default {
   display: flex;
   place-items: center;
   color: #724dd5;
-  font-weight:bold;
-  font-size:14px;
+  font-weight: bold;
+  font-size: 14px;
 }
 .question {
   color: navy;
