@@ -67,6 +67,7 @@
           <p :class="{'choiceDot': visibleChoiceDotD}">{{choiceIconD}}</p>
         </p>
       </div>
+      <button v-if='visibleNextButton' :class="{'nextButton':visibleNextButton}">Next</button>
     </div>
 
     <p class="explanation">
@@ -90,6 +91,7 @@ export default {
       error: null,
       loading: false,
       answersCounter: 0,
+      visibleNextButton:false,
       isRightAnswerA: false,
       isRightAnswerB: false,
       isRightAnswerC: false,
@@ -139,7 +141,7 @@ export default {
         (this.disabledHoverB = true),
         (this.disabledHoverC = true),
         (this.disabledHoverD = true),
-        console.log(this.currentChoices);
+this.visibleNextButton = true
 
       if (this.currentChoices.capital.capital === choice.capital) {
         switch (letter) {
@@ -291,6 +293,19 @@ export default {
   letter-spacing: 1px;
   font-family: Verdana;
 }
+.nextButton{
+  background:orange;
+  padding:12px 20px;
+  color:white;
+  font-weight:bolder;
+  font-size:14px;
+  border:none;
+  border-radius:6px;
+  position:absolute;
+  bottom:4vh;
+  right:5vh;
+  cursor:pointer;
+}
 .choiceDot{
   background:transparent;
   font-size:18px;
@@ -348,7 +363,7 @@ export default {
   width: 100%;
   border: 2px solid navy;
   border-radius: 10px;
-  height: 15%;
+  height: 13%;
   display: flex;
   place-items: center;
   color: #724dd5;
@@ -357,19 +372,20 @@ export default {
 }
 .question {
   color: navy;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: bolder;
   position: relative;
   width: 100%;
   text-align: left;
   height: 5%;
+  margin-bottom:5%;
 }
 .questionsWrapper {
   top: 9vh;
   margin: auto;
   position: relative;
   width: 85%;
-  height: 75%;
+  height: 70%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
