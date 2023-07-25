@@ -67,7 +67,7 @@
           <p :class="{'choiceDot': visibleChoiceDotD}">{{choiceIconD}}</p>
         </p>
       </div>
-      <button v-if='visibleNextButton' :class="{'nextButton':visibleNextButton}">Next</button>
+      <button v-if='visibleNextButton' :class="{'nextButton':visibleNextButton}" @click='goToNext()'>Next</button>
     </div>
 
     <p class="explanation">
@@ -136,6 +136,38 @@ export default {
       this.handleCurrentChoices();
     },
 
+goToNext(){
+  console.log('go to next')
+      this.visibleNextButton=false,
+      this.isRightAnswerA= false,
+      this.isRightAnswerB=false,
+      this.isRightAnswerC=false,
+      this.isRightAnswerD=false,
+      this.isWrongAnswerA=false,
+      this.isWrongAnswerB=false,
+      this.isWrongAnswerC=false,
+      this.isWrongAnswerD= false,
+      this.disabledHoverA= false,
+      this.disabledHoverB= false,
+      this.disabledHoverC= false,
+     this.disabledHoverD= false,
+           this.visibleChoiceDotA=false,     
+           this.visibleChoiceDotB=false,     
+           this.visibleChoiceDotC=false,
+      this.visibleChoiceDotD=false,
+      this.choiceIconA='',
+      this.choiceIconB='',
+      this.choiceIconC='',
+      this.choiceIconD='',
+      this.currentChoices= {
+        capital: {},
+        choiceA: {},
+        choiceB: {},
+        choiceC: {},
+        choiceD: {},
+      },
+      this.handleCurrentChoices()
+},
     pickAnswer(choice, letter) {
         (this.disabledHoverA = true),
         (this.disabledHoverB = true),
