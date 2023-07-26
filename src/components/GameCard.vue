@@ -186,8 +186,6 @@ goToNext(){
 },
     pickAnswer(choice, letter) {
 
-
-
       if(this.roundsCounter < 5){
 
       this.roundsCounter++
