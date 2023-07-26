@@ -2,8 +2,8 @@
   <div class="wrapper">
     <div class="wrapperBefore"></div>
     <div class="wrapperAfter"></div>
-{{roundsCounter}}
-    <div class="mainCard" v-if='roundsCounter < 0'>
+
+    <div class="mainCard" v-if='roundsCounter < 5'>
       <span class="cardTitle">Country Quiz</span>
       <!-- Stackblitz won't allow non-premium members to upload images to their projects so I used an emoji for the card image -->
       <span class="cardImage">🌍</span>
@@ -75,7 +75,7 @@
       <p class='endImage'> 🌍</p>
       <h1 class='endResults'>Results</h1>
       <p class='endResultsNumber'>You're got <span class='endResultsSpan'> {{answersCounter}}</span> correct answers</p>
-      <button class='tryAgain'>Try again</button>
+      <button class='tryAgain' @click='tryAgain()'>Try again</button>
       </div>
 
 
@@ -146,7 +146,12 @@ export default {
       this.loading = false;
       this.handleCurrentChoices();
     },
-
+  tryAgain(){
+    console.log('aaaaa')
+    this.goToNext()
+    this.answersCounter = 0
+    this.roundsCounter = 0
+  },
 goToNext(){
   // console.log('go to next')
       this.visibleNextButton=false,
