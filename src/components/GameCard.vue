@@ -2,8 +2,8 @@
   <div class="wrapper">
     <div class="wrapperBefore"></div>
     <div class="wrapperAfter"></div>
-
-    <div class="mainCard">
+{{roundsCounter}}
+    <div class="mainCard" v-if='roundsCounter < 0'>
       <span class="cardTitle">Country Quiz</span>
       <!-- Stackblitz won't allow non-premium members to upload images to their projects so I used an emoji for the card image -->
       <span class="cardImage">🌍</span>
@@ -69,6 +69,16 @@
       </div>
       <button v-if='visibleNextButton' :class="{'nextButton':visibleNextButton}" @click='goToNext()'>Next</button>
     </div>
+
+      <div class="mainCard" v-else>
+      <span class="cardTitle">Country Quiz</span>
+      <p class='endImage'> 🌍</p>
+      <h1 class='endResults'>Results</h1>
+      <p class='endResultsNumber'>You're got <span class='endResultsSpan'> {{answersCounter}}</span> correct answers</p>
+      <button class='tryAgain'>Try again</button>
+      </div>
+
+
 
     <p class="explanation">
       Challenge created by Pascu Ioana with Vue and Stackblitz for
@@ -337,6 +347,37 @@ goToNext(){
   margin: 0px;
   letter-spacing: 1px;
   font-family: Verdana;
+}
+.tryAgain{
+  color:navy;
+  border:2px solid navy;
+  border-radius:5px;
+  padding:15px 25px;
+  background:transparent;
+  cursor:pointer;
+  margin-left:35%;
+  position:absolute;
+  bottom:7vh;
+}
+.endResultsSpan{
+  color:#31bd54;
+  font-size:25px;
+  font-weight:bold;
+}
+.endResultsNumber{
+  color:navy;
+  text-align:center;
+}
+.endResults{
+  text-align:center;
+  padding:15px 0px;
+  padding-top:40px;
+  color:navy;
+}
+.endImage{
+  font-size:120px;
+  text-align:center;
+  padding-top:2vh;
 }
 .nextButton{
   background:orange;
