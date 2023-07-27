@@ -6,10 +6,16 @@
     <div class="mainCard" v-if='roundsCounter < 5'>
       <span class="cardTitle">Country Quiz</span>
       <!-- Stackblitz won't allow non-premium members to upload images to their projects so I used an emoji for the card image -->
-      <span class="cardImage">🌍</span>
+      <span v-if='!isFlagQuestion' class="cardImage">🌍</span>
+      <span v-else class="cardImage flagImage">{{currentChoices.capital.flag}}</span>
 
       <div v-if="!loading" class="questionsWrapper">
-        <p class="question">
+        <p v-if='isFlagQuestion' class="question">
+       Which country does this flag belong to?
+          {{ currentChoices.capital.name }}
+      
+        </p>
+        <p v-else class="question">
           {{ currentChoices.capital.capital }} is the capital of
           {{ currentChoices.capital.name }}
         </p>
@@ -97,6 +103,7 @@ export default {
   },
   data() {
     return {
+      isFlagQuestion:true,
       countriesInfo: [],
       error: null,
       loading: false,
@@ -350,6 +357,13 @@ goToNext(){
   margin: 0px;
   letter-spacing: 1px;
   font-family: Verdana;
+}
+.flagImage{
+  font-size:130px !important;
+  position:absolute;
+  top:-14vh !important;
+  right:1vh !important;
+
 }
 .tryAgain{
   color:navy;
