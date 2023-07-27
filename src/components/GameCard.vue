@@ -3,21 +3,23 @@
     <div class="wrapperBefore"></div>
     <div class="wrapperAfter"></div>
 
+<!-- I have chosen 5 as the maximum number of question one can try to answer to, however, this number can easily be changed -->
     <div class="mainCard" v-if='roundsCounter < 5'>
+
       <span class="cardTitle">Country Quiz</span>
+
       <!-- Stackblitz won't allow non-premium members to upload images to their projects so I used an emoji for the card image -->
+
       <span v-if='!isFlagQuestion' class="cardImage">🌍</span>
       <span v-else class="cardImage flagImage">{{currentChoices.capital.flag}}</span>
 
       <div v-if="!loading" class="questionsWrapper">
         <p v-if='isFlagQuestion' class="question">
        Which country does this flag belong to?
-          {{ currentChoices.capital.name }}
       
         </p>
         <p v-else class="question">
           {{ currentChoices.capital.capital }} is the capital of
-          {{ currentChoices.capital.name }}
         </p>
 
         <p
@@ -103,7 +105,7 @@ export default {
   },
   data() {
     return {
-      isFlagQuestion:true,
+      isFlagQuestion:false,
       countriesInfo: [],
       error: null,
       loading: false,
@@ -122,9 +124,9 @@ export default {
       disabledHoverB: false,
       disabledHoverC: false,
       disabledHoverD: false,
-           visibleChoiceDotA:false,     
-           visibleChoiceDotB:false,     
-           visibleChoiceDotC:false,
+      visibleChoiceDotA:false,     
+      visibleChoiceDotB:false,     
+      visibleChoiceDotC:false,
       visibleChoiceDotD:false,
       choiceIconA:'',
       choiceIconB:'',
@@ -139,10 +141,13 @@ export default {
       },
     };
   },
+  // on mounted a call is made to get all the countries info [ call is made only once]
   mounted() {
     this.getCountriesInfo();
   },
+
   methods: {
+    // call made to the api to get the object containing only the name, the flag and the capital
     async getCountriesInfo() {
       this.loading = true;
       const res = await fetch(
@@ -153,14 +158,18 @@ export default {
       this.loading = false;
       this.handleCurrentChoices();
     },
+
+    // function to handle the try again button, that cleans up the answer and round counters and the former answer logic
   tryAgain(){
     console.log('aaaaa')
     this.goToNext()
     this.answersCounter = 0
     this.roundsCounter = 0
   },
-goToNext(){
-  // console.log('go to next')
+
+  // function to rearrange the possible choices and pick a new correct answer
+  goToNext(){
+      this.isFlagQuestion = !this.isFlagQuestion
       this.visibleNextButton=false,
       this.isRightAnswerA= false,
       this.isRightAnswerB=false,
@@ -173,10 +182,10 @@ goToNext(){
       this.disabledHoverA= false,
       this.disabledHoverB= false,
       this.disabledHoverC= false,
-     this.disabledHoverD= false,
-           this.visibleChoiceDotA=false,     
-           this.visibleChoiceDotB=false,     
-           this.visibleChoiceDotC=false,
+      this.disabledHoverD= false,
+      this.visibleChoiceDotA=false,     
+      this.visibleChoiceDotB=false,     
+      this.visibleChoiceDotC=false,
       this.visibleChoiceDotD=false,
       this.choiceIconA='',
       this.choiceIconB='',
@@ -191,21 +200,25 @@ goToNext(){
       },
       this.handleCurrentChoices()
 },
-    pickAnswer(choice, letter) {
 
+
+// function to handle when an aswer is picked, send the information behind the clicked option and the letter 
+    pickAnswer(choice, letter) {
       if(this.roundsCounter < 5){
 
-      this.roundsCounter++
+        // incrementing the rounds counter
+        this.roundsCounter++
+        
+        // disabling the hover option after the click
         this.disabledHoverA = true,
         this.disabledHoverB = true,
         this.disabledHoverC = true,
         this.disabledHoverD = true,
         this.visibleNextButton = true
-         console.log(this.roundsCounter, 'rounds')
 
-      if (this.currentChoices.capital.capital === choice.capital) {
+// logic to properly style the correct choice
+      if (this.currentChoices.capital.capital === choice.capital)  {
         this.answersCounter++
-        console.log(this.answersCounter)
         switch (letter) {
           case 'A':
             this.isRightAnswerA = true;
@@ -229,6 +242,7 @@ goToNext(){
             break;
         }
       }
+      // logic to handle the wrong answer and the highlinghting of the right answer
        else if (this.currentChoices.capital.capital !== choice.capital) {
           let winningKey;
         for (const [key, value] of Object.entries(this.currentChoices)) {
@@ -252,7 +266,7 @@ goToNext(){
             break;
           case 'C':
             this.isRightAnswerC = true;
-            this.visibleChoiceDotBC = true;
+            this.visibleChoiceDotC = true;
             this.choiceIconC = '✓'
             break;
           case 'D':
@@ -285,10 +299,10 @@ goToNext(){
         }
       }
       }
-      else if (this.roundsCounter >= 5){
-        console.log('more than 5 rounds')
-      }
     },
+
+
+// function to create a random correct answer and random possible choices, one of which being the right answer
     handleCurrentChoices() {
       if (this.countriesInfo.length) {
         let capital =
@@ -339,9 +353,9 @@ goToNext(){
           capital: choiceD.capital[0],
         };
 
+// logic to make one of the possible choices correct
         let keys = ['choiceA', 'choiceB', 'choiceC', 'choiceD'];
         let randomRightAnswer = keys[Math.floor(Math.random() * keys.length)];
-
         this.currentChoices[randomRightAnswer] = this.currentChoices.capital;
 
       }
@@ -350,7 +364,7 @@ goToNext(){
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- all the CSS is here -->
 <style scoped>
 * {
   padding: 0px;
